@@ -13,7 +13,7 @@ public class StorageQueueController : ControllerBase
     public StorageQueueController(IQueuePublisherManager publisher) => _publisher = publisher;
 
     [HttpPost("add")]
-    public async Task<IActionResult> Post([FromBody] MessageQueueViewModelcs messageQueue)
+    public async Task<IActionResult> Post([FromBody] MessageQueueViewModels messageQueue)
     {
         await _publisher.InsertMessageQueueAsync(messageQueue.Message, messageQueue.QueueName, messageQueue.TimeoutVisibility);
         return Accepted(new { success = "Mensagem adicionada na fila com sucesso!" });

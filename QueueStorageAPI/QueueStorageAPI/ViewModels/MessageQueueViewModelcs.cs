@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace QueueStorageAPI.ViewModels;
 
-public class MessageQueueViewModelcs
+public class MessageQueueViewModels
 {
     [Required]
     [JsonPropertyName("message")]
