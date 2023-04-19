@@ -1,4 +1,6 @@
 using QueueStorageBackgoundService.Implementations;
+using QueueStoragePublisher.Implementations;
+using QueueStoragePublisher.Interfaces;
 using QueueStorageSubscriber.Implementations;
 using QueueStorageSubscriber.Interfaces;
 
@@ -9,6 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<IQueueSubscriberManager, QueueSubscriberManager>();
+builder.Services.AddScoped<IQueuePublisherManager, QueuePublisherManager>();
 builder.Services.AddHostedService(provider =>
 {
     var timeInSeconds = (1000 * 10); // 10 segundos

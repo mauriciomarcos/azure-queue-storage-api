@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\QueueStorageBackgoundService\QueueStorageBackgoundService.csproj" />
+    <ProjectReference Include="..\QueueStoragePublisher\QueueStoragePublisher.csproj" />
     <ProjectReference Include="..\QueueStorageSubscriber\QueueStorageSubscriber.csproj" />
   </ItemGroup>
 
