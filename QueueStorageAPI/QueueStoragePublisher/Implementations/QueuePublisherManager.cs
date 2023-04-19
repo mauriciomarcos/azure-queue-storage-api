@@ -56,5 +56,5 @@ public class QueuePublisherManager : IQueuePublisherManager
         }
     }
 
-    private QueueClient CreateQueueClient(string queueName) => new QueueClient(_connectionString, queueName);
+    private QueueClient CreateQueueClient(string queueName) => new(_connectionString, queueName);
 }

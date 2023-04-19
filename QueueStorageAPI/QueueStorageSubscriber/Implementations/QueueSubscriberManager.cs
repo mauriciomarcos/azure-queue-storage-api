@@ -25,23 +25,23 @@ public class QueueSubscriberManager : IQueueSubscriberManager
         {
             QueueClient queueClient = CreateQueueClient(queueName);
 
-            if (!queueClient.Exists())
+            if (!queueClient.Exists(cancellationToken))
                 throw new DequeueMessageException($"A Fila {queueName} não existe. Operação não realizada!");
 
-            QueueMessage[] receivedMessages = await queueClient.ReceiveMessagesAsync(20, TimeSpan.FromMinutes(1));
+            QueueMessage[] receivedMessages = await queueClient.ReceiveMessagesAsync(20, TimeSpan.FromMinutes(1), cancellationToken);
             foreach (var message in receivedMessages)
             {
                 _logger.LogInformation("Recuperando a Mensagem {Message} da Fila {QueueName}", message.MessageText, queueName);
 
-                await queueClient.DeleteMessageAsync(message.MessageId, message.PopReceipt);
+                await queueClient.DeleteMessageAsync(message.MessageId, message.PopReceipt, cancellationToken);
             }
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, ex.Message);
+            _logger.LogError(ex, "{ExceptionMessage}", ex.Message);
             throw;
         }      
     }
 
-    private QueueClient CreateQueueClient(string queueName) => new QueueClient(_connectionString, queueName);
+    private QueueClient CreateQueueClient(string queueName) => new(_connectionString, queueName);
 }
